@@ -1,0 +1,25 @@
+import plotly.express as px
+import pandas as pd
+
+# Load the built-in dataset with country information
+df = px.data.gapminder().query("year==2007")
+
+# Create the choropleth map
+fig = px.choropleth(
+    df,
+    locations="iso_alpha",  # Country codes
+    color="continent",      # Color by continent for visual distinction
+    hover_name="country",   # This will show country name on hover
+    projection="natural earth",
+    title="Interactive World Map - Hover for Country Names",
+    height=600,
+)
+
+# Update layout for better appearance
+fig.update_layout(
+    margin=dict(l=0, r=0, t=50, b=0),
+    coloraxis_showscale=False,
+)
+
+# Show the map
+fig.show()
